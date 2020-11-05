@@ -1,0 +1,13 @@
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.exe
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.deps.json
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.runtimeconfig.json
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.runtimeconfig.dev.json
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.dll
+C:\dev\TrabalhoThreads\bin\Debug\netcoreapp3.1\TrabalhoThreads.pdb
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.csprojAssemblyReference.cache
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.AssemblyInfoInputs.cache
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.AssemblyInfo.cs
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.csproj.CoreCompileInputs.cache
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.dll
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.pdb
+C:\dev\TrabalhoThreads\obj\Debug\netcoreapp3.1\TrabalhoThreads.genruntimeconfig.cache
