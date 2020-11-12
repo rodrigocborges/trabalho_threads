@@ -15,18 +15,6 @@ namespace TrabalhoThreads
      * https://stackoverflow.com/questions/4488054/merge-two-or-more-lists-into-one-in-c-sharp-net
      */
     
-    //Classe auxiliar para armazenar cada informação relevante da manipulação
-    public class FileInformations
-    {
-        public string Filename { get; set; }
-        public int WordsCount { get; set; }
-        public int VowelsCount { get; set; }
-        public int ConsonantsCount { get; set; }
-        public string WordMostFrequently { get; set; }
-        public string VowelMostFrequently { get; set; }
-        public string ConsonantMostFrequently { get; set; }
-    }
-    
     public class Util
     {
         private static string filepath = "";
@@ -118,12 +106,6 @@ namespace TrabalhoThreads
 
             try
             {
-                //for(int i = 0; i < threadsNumber; ++i)
-                //{
-                //    Task task = new Task(() => {
-                        
-                //    });
-                //}
                 foreach(FileInformations f in fileInformations)
                 {
                     List<char> vowelsList = new List<char>();
@@ -154,6 +136,13 @@ namespace TrabalhoThreads
                         f.WordMostFrequently = words.Where(x => x.Length > 1).GroupBy(x => x).Select(x => x).OrderByDescending(x => x.Count()).First().Key;
                         f.VowelMostFrequently = vowelsList.GroupBy(x => x).OrderByDescending(xs => xs.Count()).Select(xs => xs.Key).First().ToString();
                         f.ConsonantMostFrequently = consonantsList.GroupBy(x => x).OrderByDescending(xs => xs.Count()).Select(xs => xs.Key).First().ToString();
+                        //Cria diretório upper para duplicar os arquivos de texto só que com o conteúdo em maiúsuclo
+                        string[] aux = f.Filename.Split('\\');
+                        string filename = aux[aux.Length - 1];
+                        string dir = filepath + "\\upper\\";
+                        if (!Directory.Exists(dir))
+                            Directory.CreateDirectory(dir);
+                        File.WriteAllText(dir + filename, allText.ToUpper());
                     }
                 }
             }

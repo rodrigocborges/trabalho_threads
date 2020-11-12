@@ -38,6 +38,8 @@ namespace TrabalhoThreads
 
         static void MatrixMult()
         {
+            
+            
 
         }
 
@@ -58,7 +60,6 @@ namespace TrabalhoThreads
                 Console.WriteLine("----------------------");
                 Console.WriteLine("Informações dos arquivos:");
                 Util.FileManipulation(0);
-                //FAZER: REPLICAR ARQUIVOS COM O TEXTO MAIUSCULO DE CADA UM
                 Util.ShowFileInformations();
                 Console.WriteLine("----------------------");
 
