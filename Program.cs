@@ -122,7 +122,7 @@ namespace TrabalhoThreads
 
         }
 
-        static void FileManipulation()
+        static void FileManip()
         {
         /*
          Faça um programa que, dado um diretório com arquivos de texto no formato .txt, calcule as 
@@ -135,12 +135,25 @@ namespace TrabalhoThreads
             string filepath = Util.ConsoleInOut("Digite o local do arquivo: ");
             if (Directory.Exists(filepath))
             {
-                Util.DefineFilePath(filepath);
-                Console.WriteLine("----------------------");
-                Console.WriteLine("Informações dos arquivos:");
-                Util.FileManipulation(0);
-                Util.ShowFileInformations();
-                Console.WriteLine("----------------------");
+                FileManipulation fm = new FileManipulation(filepath);
+
+                List<Thread> threads = new List<Thread>();
+                
+                // O número de threads vai ser igual ao número de arquivos
+                foreach(FileInformations f in fm.fileInformations)
+                {
+                    threads.Add(new Thread( () => {
+                        fm.Manipulate(f);
+                    } ));
+                }
+
+                for(int i = 0; i < threads.Count; ++i)
+                {
+                    threads[i].Start();
+                    threads[i].Join();
+                }
+
+                fm.ShowFileInformations();
 
             }
             else
@@ -169,7 +182,7 @@ namespace TrabalhoThreads
             else if (option == "2")
                 MatrixMult();
             else if (option == "3")
-                FileManipulation();
+                FileManip();
             else
             {
                 Console.WriteLine("Valor inválido, tente novamente!");
