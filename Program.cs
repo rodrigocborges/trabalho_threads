@@ -22,25 +22,49 @@ namespace TrabalhoThreads
         PutVectorSize:
             string sizeV = Util.ConsoleInOut("Informe o tamanho do vetor a ser invertido: ");
 
-            if (Convert.ToInt32(sizeV) < 10)
+            if(Convert.ToInt32(sizeV) <= 0)
             {
-                Console.WriteLine("O número de itens de um vetor tem que ser no mínimo 10, digite novamente!");
+                Console.WriteLine("O tamanho do vetor tem que ser maior que 0, tente novamente!");
                 goto PutVectorSize;
             }
 
-            PutThreadNumber:
-            string threadsN = Util.ConsoleInOut("Número de threads: (1, 2, 5)");
+        PutThreadNumber:
+            string inputThread = Util.ConsoleInOut("Número de threads: ");
+            int nThreads = Convert.ToInt32(inputThread);
 
-            if (threadsN.Equals("1") || threadsN.Equals("2") || threadsN.Equals("5"))
+            if (nThreads < 1)
             {
-                Util.FillVector(numbersVector, Convert.ToInt32(sizeV));
-                Util.PrintVector(numbersVector, "Vetor original");
-            }
-            else
-            {
-                Console.WriteLine("Valor inválido de threads, digite novamente!");
+                Console.WriteLine("O número de threads tem que ser maior ou igual a 1, tente novamente!");
                 goto PutThreadNumber;
             }
+
+            Vector vectorA = new Vector(Convert.ToInt32(sizeV));
+            Vector vectorB = new Vector(Convert.ToInt32(sizeV));
+
+            vectorA.Fill();
+            
+            if (nThreads > Convert.ToInt32(sizeV))
+                nThreads = Convert.ToInt32(sizeV);
+
+            int[] steps = new int[nThreads + 1];
+            Util.SetSteps(steps, Convert.ToInt32(sizeV), nThreads);
+
+            Thread[] threads = new Thread[nThreads];
+            int start, end;
+
+            for(int i = 0; i < nThreads; ++i)
+            {
+                start = steps[i];
+                end = steps[i + 1];
+
+                threads[i] = new Thread( () => Vector.Invert(vectorA, vectorB, start, end) );
+                threads[i].Start();
+                threads[i].Join();
+            }
+
+            vectorA.Print();
+            vectorB.Print();
+
         }
 
         static void MatrixMult()

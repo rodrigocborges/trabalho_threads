@@ -27,54 +27,6 @@ namespace TrabalhoThreads
             return s.ToLower(); //retorna tudo minúsculo para possíveis comparações
         } 
 
-        //Preencher um vetor com números aleatórios até um tamanho definido
-        public static void FillVector(List<int> v, int size)
-        {
-            for(int i = 0; i < size; ++i)
-            {
-                v.Add(new Random().Next(0, size));
-            }
-        }
-
-        public static void PrintVector(List<int> v, string title)
-        {
-            Console.WriteLine(string.Format("-------- \t{0}\t --------", title));
-            for(int i = 0; i < v.Count; ++i)
-            {
-                Console.WriteLine(string.Format("[{0}]{1}", i, v[i]));
-            }
-            Console.WriteLine("---------------------------------------");
-        }
-
-        private static List<int> _initialVector = new List<int>();
-        private static List<int> _invertedVector = new List<int>();
-
-        private static void InvertVectorStepByStep()
-        {
-            for (int i = _initialVector.Count - 1; i >= 0; --i)
-                _invertedVector.Add(_initialVector[i]);
-        }
-        
-        public static List<int> InvertVector(List<int> initialVector, int threadsNumber = 0)
-        {
-            List<int> invertedVector = new List<int>();
-            _initialVector = initialVector;
-            if(threadsNumber == 0)
-            {
-                for(int i = initialVector.Count - 1; i >= 0; --i)
-                    invertedVector.Add(initialVector[i]);
-            }
-            else
-            {
-                for(int i = 0; i < threadsNumber; ++i)
-                {
-                    Thread t = new Thread(new ThreadStart(InvertVectorStepByStep));
-                    t.Start();
-                }
-            }
-            return _invertedVector;
-        }
-        
         //Define caminho de arquivos para utilizar nas funções de manipulação de arquivo
         public static void DefineFilePath(string fp)
         {
@@ -152,6 +104,7 @@ namespace TrabalhoThreads
             }
         }
 
+        //Classe auxiliar para definir os limites de inicio e fim pegando uma parte do vetor ou matriz para dividir entre threads
         public static void SetSteps(int[] steps, int size, int nThreads)
         {
             int diff = size / nThreads;

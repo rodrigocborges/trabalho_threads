@@ -40,7 +40,7 @@ namespace TrabalhoThreads
             Console.WriteLine();
         }
 
-        //Função responsável por multiplicar duas matrizes e retornar uma outra
+        //Função responsável por multiplicar duas matrizes e retornar na matriz C por passagem por referencia
         public static void Mult(Matrix A, Matrix B, Matrix C, int start, int end)
         {
             for(int i = start; i < end; ++i)
