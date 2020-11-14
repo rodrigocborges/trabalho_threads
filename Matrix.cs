@@ -8,8 +8,8 @@ namespace TrabalhoThreads
     public class Matrix
     {
         public int[,] MatrixArr;
-        private int rows = 0;
-        private int columns = 0;
+        public int rows { get; private set; }
+        public int columns { get; private set; }
         public Matrix(int amountRows, int amountColumns)
         {
             rows = amountRows;
@@ -41,19 +41,17 @@ namespace TrabalhoThreads
         }
 
         //Função responsável por multiplicar duas matrizes e retornar uma outra
-        public static Matrix Mult(Matrix A, Matrix B, int start, int end)
+        public static void Mult(Matrix A, Matrix B, Matrix C, int start, int end)
         {
-            Matrix r = new Matrix(A.rows, B.columns);
             for(int i = start; i < end; ++i)
             {
                 for(int j = 0; j < B.rows; ++j)
                 {
                     for (int x = 0; x < A.columns; ++x)
-                        r.MatrixArr[i, j] += A.MatrixArr[i, x] * B.MatrixArr[x, j];
+                        C.MatrixArr[i, j] += A.MatrixArr[i, x] * B.MatrixArr[x, j];
                         
                 }
             }
-            return r;
         }
     }
 }

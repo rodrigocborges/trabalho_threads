@@ -152,5 +152,27 @@ namespace TrabalhoThreads
             }
         }
 
+        public static void SetSteps(int[] steps, int size, int nThreads)
+        {
+            int diff = size / nThreads;
+            for (int i = 0; i < steps.Length; ++i)
+                steps[i] = diff * i;
+
+            int rest = size % nThreads;
+            steps[steps.Length - 1] += rest;
+
+            if(rest > 1)
+            {
+                int aux = 0;
+                while(rest > 1)
+                {
+                    for (int i = steps.Length - 2; i > (1 + aux); --i)
+                        steps[i] += 1;
+                    --rest;
+                    ++aux;
+                }
+            }
+        }
+
     }
 }

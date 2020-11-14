@@ -12,7 +12,14 @@ namespace TrabalhoThreads
 
         static void InvertVector()
         {
-            PutVectorSize:
+        /*
+         Faça um programa que inverta a ordem dos elementos de um vetor de inteiros com N valores. 
+        Por exemplo, se o vetor contiver os elementos 1, 2, 3, 4, 5 o vetor de saída deverá 
+        ser 5, 4, 3, 2, 1. O tamanho do vetor e o número de threads devem ser informados pelo 
+        usuário. Os elementos do vetor devem ser gerados de forma aleatória pelo programa. 
+        O programa deverá imprimir na tela o vetor de entrada e o vetor de saída.
+         */
+        PutVectorSize:
             string sizeV = Util.ConsoleInOut("Informe o tamanho do vetor a ser invertido: ");
 
             if (Convert.ToInt32(sizeV) < 10)
@@ -38,8 +45,56 @@ namespace TrabalhoThreads
 
         static void MatrixMult()
         {
-            
-            
+            /*
+             Faça um programa que multiplique duas matrizes A e B, cujos dimensões são MxN e NxP, onde M pode ou não 
+            ser igual a P. O tamanho das matrizes e o número de threads devem ser informados pelo usuário. Os valores
+            das matrizes devem ser gerados de forma aleatória pelo programa. O programa deverá imprimir na tela as
+            matrizes A e B bem como o resultado da sua multiplicação.
+             */
+            SetMatrixInfo:
+            string inputMatrixA = Util.ConsoleInOut("Digite a quantidade de linhas e colunas da matriz A (nesse formato, exs: 3x3, 2x2, 6x6):");
+            string inputMatrixB = Util.ConsoleInOut("Digite a quantidade de linhas e colunas da matriz B: ");
+            string inputThreads = Util.ConsoleInOut("Digite a quantidade de threads: ");
+            string[] rowColumnA = inputMatrixA.Split('x');
+            string[] rowColumnB = inputMatrixB.Split('x');
+
+            //O número de colunas da matriz A tem que ser igual ao número de linhas da matriz B
+            if(Convert.ToInt32(rowColumnA[1]) != Convert.ToInt32(rowColumnB[0]))
+            {
+                Console.WriteLine("O número de colunas da matriz A tem que ser igual ao número de linhas da matriz B, digite novamente!");
+                goto SetMatrixInfo;
+            }
+
+            Matrix matrixA = new Matrix(Convert.ToInt32(rowColumnA[0]), Convert.ToInt32(rowColumnA[1]));
+            Matrix matrixB = new Matrix(Convert.ToInt32(rowColumnB[0]), Convert.ToInt32(rowColumnB[1]));
+            Matrix matrixC = new Matrix(matrixA.rows, matrixB.columns);
+
+            matrixA.Fill();
+            matrixB.Fill();
+            matrixA.Print();
+            matrixB.Print();
+
+            int nThreads = Convert.ToInt32(inputThreads);
+            if (nThreads > matrixA.rows)
+                nThreads = matrixA.rows;
+
+            Thread[] threads = new Thread[nThreads];
+            int[] steps = new int[nThreads + 1];
+            Util.SetSteps(steps, matrixA.rows, nThreads);
+
+            int start, end, x = 0;
+            for(int i = 0; i < nThreads; ++i)
+            {
+                start = steps[i];
+                end = steps[i + 1];
+
+                threads[i] = new Thread( () => Matrix.Mult(matrixA, matrixB, matrixC, start, end) );
+                threads[i].Start();
+                threads[i].Join();
+
+                x++;
+            }
+            matrixC.Print();
 
         }
 
