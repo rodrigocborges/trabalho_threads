@@ -17,6 +17,7 @@ namespace TrabalhoThreads
         private string[] vowels = new string[] { "a", "e", "i", "o", "u" };
         private string[] consonants = new string[] { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" };
 
+        //Construtor para definir diretório e caso não exista o diretório upper, cria
         public FileManipulation(string dir)
         {
             directory = dir;
@@ -36,6 +37,7 @@ namespace TrabalhoThreads
             }
         }
 
+        //Responsável em exibir as informações de todos os arquivos analisados
         public void ShowFileInformations()
         {
             foreach (FileInformations f in fileInformations)
@@ -51,6 +53,7 @@ namespace TrabalhoThreads
             }
         }
 
+        //Função responsável em analisar todas as informações dos arquivos e preencher na lista
         public void Manipulate(FileInformations f)
         {
             try
@@ -95,6 +98,7 @@ namespace TrabalhoThreads
             }
         }
 
+        //Retorna tamanho do vetor de informações de arquivos
         public int GetFilesCount()
         {
             return fileInformations.Count;
